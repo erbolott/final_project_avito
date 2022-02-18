@@ -1,0 +1,87 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}User Login{% endblock %}
+
+
+
+{% block content %}
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image" />
+</div>
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Главная</a></li>
+					<li><a href="{% url 'login' %}">Войти</a></li>
+				</ul> 
+			</div>
+			<div class="pull-right">
+				<h2>Войти</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+
+
+<!-- faq start here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="col-md-12 col-sm-12 col-xs-12 login padd0">
+			<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12 bor">
+				<img style="width:200px;mix-blend-mode: multiply;" src="{{settings.logo.url}}" alt="logo" title="logo" />
+				<div class="donot">Нет учетной записи? <a href="{% url 'signup_form' %}">Создать учетную запись</a>
+				</div>
+				<p>Это займет меньше минуты</p>
+				<div class="or">
+					<span>или</span>
+					<hr/>
+				</div>
+				<h2>Войти через учетные записи социальных сетей</h2>
+				<ul class="list-unstyled">
+					<li><a href="" target="_blank" class="fb"><i class="fa fa-facebook"></i> Войти через Facebook</a></li>
+					<li><a href="{% provider_login_url "vk" %}" target="_blank" class="tw"><i class="fa fa-twitter"></i> Войти через VK</a></li>
+					<li><a href="{% provider_login_url "google" %}" target="_blank" class="gp"><i class="fa fa-google"></i> Войти через Google</a></li>
+				</ul>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<h1>Войти</h1>
+				{% if messages %}
+					{% for foo in messages %}
+						<div class="alert alert-{{foo.tags}}" role="alert">
+							{{foo}}
+						</div>
+					{% endfor %}
+				{% endif %}
+				<form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %} 
+
+					<div class="form-group">
+						<i class="la la-envelope-o"></i><input  type="text"  name="username"  placeholder="Телефон или электронная почта" id="input-email" class="form-control" />
+					</div>
+					<div class="form-group">
+						<i class="la la-envelope-o"></i><input  type="password"  name="password" placeholder="Пароль" id="input-email" class="form-control"> 
+					</div>
+					<div class="links">
+						<i class="la la-check-circle"></i>Запомните меня
+						<a href="" class="pull-right">Забыли пароль?</a>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block" >Войти сейчас</button>
+						 
+				</form>
+			</div>	
+			</div>	
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

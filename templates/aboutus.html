@@ -1,0 +1,101 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image" />
+</div>
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Главная</a></li>
+					<li><a href="{% url 'about' %}">О компании</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="row about">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h1>О компании</h1>
+				<hr>
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-12">
+				<img src="{% static 'images/about/01.png' %}" class="img-fluid" alt="image" title="image" />
+			</div>
+			<div class="col-md-7 col-sm-7 col-xs-12">
+				{{settings.about_page|safe}}
+			</div>
+		</div>
+		<div class="row team">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h1>Наша команда</h1>
+				<hr>
+			</div>
+		{% for tm in team %}	
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="box">
+					<img src="{{tm.image.url}}" class="img-fluid" alt="image" title="image" />
+					<div class="caption">
+						<h4>{{tm.name}}</h4>
+						<p>{{tm.rank}}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</div>
+<!-- faq end here -->
+
+<!-- abouticon start here -->
+<div class="abouticon">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="box">
+					<img src="{% static 'images/about/icon1.png' %}" class="img-fluid" alt="icon" title="icon" />
+					<h4>764</h4>
+					<p>Cup of Coffee</p>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="box">
+					<img src="{% static 'images/about/icon2.png' %}" class="img-fluid" alt="icon" title="icon" />
+					<h4>12,544</h4>
+					<p>Довольных</p>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="box">
+					<img src="{% static 'images/about/icon3.png' %}" class="img-fluid" alt="icon" title="icon" />
+					<h4>{{posts_total}}</h4>
+					<p>Объявлений</p>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div class="box">
+					<img src="{% static 'images/about/icon4.png' %}" class="img-fluid" alt="icon" title="icon" />
+					<h4>{{users_total}}</h4>
+					<p>Пользователей</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- abouticon end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

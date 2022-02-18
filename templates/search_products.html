@@ -1,0 +1,81 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+
+{% block title %}{{settings.title}} | {{query}} результат{% endblock %}
+
+
+
+{% block content %}
+<!-- breadcrumb end here -->
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Главная</a></li>
+					<li class="active">{{query}}</li>
+				</ul>
+			</div>
+			<div class="pull-right">
+				<h2>{{catdata.title}}</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+
+
+<!-- content start here -->
+<div class="maincategory">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+				<div class="left">
+					<div class="category">
+						<h1>Категории</h1>
+						<ul class="list-unstyled">
+                            {% recursetree category %}
+                            <li><a href="{% url 'category_product' node.id node.slug %}"><img width="20px" src="{{node.image.url}}" alt="icon" title="icon" class="img-fluid" /><p>{{ node.title }}</p></a></li>
+                            {% endrecursetree %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-10 col-sm-9 col-md-9 padd0 col-xs-12 catebox">
+				<div class="row">
+					{% for pp in products %}
+					<div class="product-layout product-grid col-lg-3 col-md-4 col-sm-6 col-xs-12 cols">
+						<div class="product-thumb">
+							<div class="image">
+								<a href="/product/{{pp.id}}/{{pp.slug}}"><img src="{{pp.image.url}}" alt="image" title="image" class="img-fluid"></a>
+								<div class="onhover"> {{pp.price}} ₽</div>
+							</div>
+							<div class="caption">
+								<h4 style="font-size:15px;"><a href="/product/{{pp.id}}/{{pp.slug}}">{{pp.title}}</a></h4>
+								<p class="des">Категория : {{catdata.title}}</p>
+								<ul class="list-unstyled">
+									<li><i class="la la-map-marker"></i> Ludhiana, Punjab, India</li>
+									<li><i class="la la-clock-o"></i>{{pp.create_at}}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+					
+				<div class="text-center icon">
+					<i class="la la-spinner fa-spin"></i>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>
+<!-- content end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

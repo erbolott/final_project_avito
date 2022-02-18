@@ -1,0 +1,67 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<!-- breadcrumb end here -->
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image" />
+</div>
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="index.html">Главная</a></li>
+					<li>FAQ</a></li>
+				</ul>
+			</div>
+			<div class="pull-right">
+				<h2>FAQ</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+
+
+<!-- faq start here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="faq">
+					<h5>Часто задаваемые вопросы</h5>
+					<hr />
+                    {% for quest in faq %}
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default active">
+							<div class="panel-heading">
+								<a data-toggle="collapse" href="#collapse1" role="button" aria-expanded="true" aria-controls="collapse1"><h4 class="panel-title">
+								  {{quest.question}}<i class="fa fa-angle-down" aria-hidden="true"></i></h4>
+								</a>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+								<div class="panel-body">
+									<p>{{quest.answer}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- faq end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

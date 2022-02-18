@@ -1,0 +1,96 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<!-- breadcrumb end here -->
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image" />
+</div>
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Главная</a></li>
+					<li>Контакты</li>
+				</ul>
+			</div>
+			<div class="pull-right">
+				<h2>Контакты</h2>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+
+
+<!-- contactus start here -->
+<div class="contactus">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<div class="map">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1999.0015541471519!2d30.40103231533897!3d59.93211638187382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469631e9724aab27%3A0x3c513144cac0efba!2z0JDQstC40YLQvg!5e0!3m2!1sru!2skg!4v1641790267168!5m2!1sru!2skg"  allowfullscreen="" loading="lazy"></iframe>
+				</div>
+			</div>
+			<div class="col-sm-9 col-xs-12">
+				{% if messages %}
+					{% for foo in messages %}
+						<div class="alert alert-{{foo.tags}}" role="alert">
+							{{foo}}
+						</div>
+					{% endfor %}
+				{% endif %}
+				<form method="post" enctype="multipart/form-data" class="form-horizontal">
+					{% csrf_token %}
+					<h5>Помощь & Вопросы</h5>
+					<hr />
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							{{form.name}}<br>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							{{form.email}}<br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							{{form.subject}}<br>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+
+						</div>
+					</div>
+					{{form.text}}
+					<div class="buttons">
+						<input class="btn btn-primary" value="Отправить" type="submit">
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<div class="address mar-b">
+					<h3>Адресс</h3>
+					<p>{{settings.location}}</p>
+				</div>
+				<div class="address">
+					<h3>Контактная информация</h3>
+					<ul class="list-unstyled">
+						<li><span>Email : </span><p><a href="#">{{settings.email}}</a></p></li>
+						<li><span>Тел : </span><p>{{settings.phone}}</p></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- contactus end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,59 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<!-- ad-single start here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<div class="add">
+					<div class="addtop">
+						<h3>Подать бесплатное объявление</h3>
+					</div>
+                    {% if messages %}
+                        {% for foo in messages %}
+                            <div class="alert alert-{{foo.tags}}" role="alert">
+                                {{foo}}
+                            </div>
+                        {% endfor %}
+				    {% endif %}
+					<form method="post" enctype="multipart/form-data" class="form-horizontal addform">
+                        {% csrf_token %}
+                        <label>Имя :</label>
+                        {{form.title}}<br>
+                        <label>Категория :</label>
+                        {{form.category}}<br>
+                        <label>Цена :</label>
+                        {{form.price}}<br>
+                        <label>Год :</label>
+                        {{form.year}}<br>
+                        <label>Описание :</label>
+                        {{form.description}}<br>
+                        <label>Фото :</label>
+                        {{form.image}}<br>
+                        <label>Номер телефона :</label>
+                        {{form.phone}}<br>
+                        <label>Город :</label>
+                        {{form.city}}<br>
+                        
+						<div class="buttons">
+							<input class="btn btn-primary" value="Разместить" type="submit">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ad-single end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,55 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<!-- breadcrumb end here -->
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image" />
+</div>
+<div class="bread-crumb">
+	<div class="container">
+		<div class="matter">
+			<div class="pull-left">
+				<ul class="list-inline">
+					<li><a href="{% url 'home' %}">Главная</a></li>
+					<li>Условия использования</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb end here -->
+
+
+<!-- faq start here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="terms">
+					<h5>Условия использования Авито</h5>
+					<hr />
+					<div class="mainbox">
+						{% for el in terms_of_use %}
+						<div class="box">
+							<h4>{{el.theme_use}}</h4>
+							<p>{{el.description_use}}</p>
+						</div>
+						{% endfor %}
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- faq end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}

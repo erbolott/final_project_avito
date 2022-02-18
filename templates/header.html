@@ -1,0 +1,128 @@
+<!--top start here -->
+{% load i18n %}
+{% load static i18n %}
+<div class="top">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-5 col-xs-12">
+				<ul class="list-inline icon">
+					<li>
+						<!--language code start here-->
+						<form  method="post" enctype="multipart/form-data" id="language">
+							<div class="btn-group">
+								<button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+									<span class="text"><i class="la la-language"></i>English</span> <i class="la la-caret-down"></i>
+								</button>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="javascript:;"><img src="{% static 'images/flag.jpg' %}" alt="english" title="english" /> English</a></li>
+								</ul>
+							</div>
+						</form>
+						<!--language code end here-->
+					</li>
+					<li><a href="{% url 'login' %}"><i class="la la-plus-square"></i> <span>Войти</span></a></li>
+					<li><a href="{% url 'signup_form' %}"><i class="la la-key"></i> <span>Регистрация</span></a></li>
+				</ul>
+			</div>
+			<div class="col-md-7 col-sm-7 col-xs-12">
+				<div class="topnav responsive" id="myTopnav">
+					<ul class="list-inline">
+						<li><a href="{% url 'home' %}"> Главная</a></li>
+						<li><a href="{% url 'about' %}">О компании</a></li>
+						<li class="dropdown" ><a data-toggle="dropdown" href="#">Blog</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-inner">
+									<ul class="list-unstyled">
+										<li><a href="blog.html">Our Blog</a></li>
+										<li><a href="blogdetail.html">Blog Detail</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="{% url 'contact' %}">Контакты</a></li>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Страницы</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-inner">
+									<ul class="list-unstyled">
+										<li><a href="{% url 'dashboard' %}">Профиль</a></li>
+										<li><a href="{% url 'terms_of_use' %}">Условия использования</a></li>
+										<li><a href="{% url 'faq' %}">FAQ</a></li>
+										<li><a href="price_plan.html">Тарифные планы</a></li>
+										<li><a href="all_ads.html"> All Ads</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="javascript:void(0);" class="icons" onclick="myFunction()">&#9776;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="icon-bar">
+	<a href="https://wptheme.co.in/classified_html/" class="linkedin d-none">
+		<i class="fa fa-home"></i><br/>
+		<span>Visit Demo</span>
+	</a>
+</div>
+<!--top end here -->
+
+<!-- header start here-->
+<header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<div id="logo">
+					<a href="{% url 'home' %}"><img width="150px" src="{{settings.logo.url}}" alt="logo" title="logo" /></a>
+				</div>
+			</div>
+				
+			<div class="col-md-7 col-sm-7 col-xs-12">
+				<form class="form-horizontal category" action="/search/" method="post">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-sm-3 paddright">
+							<div class="form-group">
+								<select class="selectpicker form-control bs-select-hidden" name="location">
+									<option value="1">Select City</option>
+									<option value="0">Ludhiana</option>
+									<option value="0">Jalandhar</option>
+									<option value="0">Moga</option>
+									<option value="0">Ambala</option>
+									<option value="0">Amritsar</option>
+									<option value="0">Delhi</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-3 paddright">
+							<div class="form-group">
+								<select class="selectpicker form-control bs-select-hidden" name="catid">
+									<option value="1">Все категории</option>
+									{% for cat in category %}
+									<option value="">{{cat.title}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6 search">
+							<div class="form-group">
+								<input name="query" id="query" class="form-control" placeholder="Поиск по объявлениям" type="text">
+								<button type="submit" value="submit" class="btn"><i class="icon_search" aria-hidden="true"></i></button>
+							</div>
+						</div>
+                    </div>
+				</form>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-12 center">
+				<!-- <button class="btn-primary btn-block" type="button" onclick="location.href='{ %}'">Разместить объявление</button> -->
+				{% if user.id is not None %}
+				<button class="btn-primary btn-block"><a href='{% url "add_listing" %}'> Разместить объявление</a></button>
+				{% else %}
+				<button class="btn-primary btn-block"><a href='{% url "login" %}'> Разместить объявление</a></button>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</header>
+<!-- header end here -->

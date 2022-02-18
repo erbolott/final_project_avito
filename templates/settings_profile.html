@@ -1,0 +1,221 @@
+<!-- breadcrumb end here -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{setting.title}}{% endblock %}
+
+
+
+{% block content %}
+<div class="topimage">
+	<img src="{% static 'images/bck_bg.jpg' %}" class="img-fluid" alt="image" title="image">
+</div>
+
+{% if user.id is not None %}
+<!-- ad-single start here -->
+<div class="commontop">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<div class="dashboard">
+				
+					<div class="profile">
+						
+						<div class="col-sm-3 col-xs-12">
+							<!-- <img class="img-fluid" src="{{ request.session.userimage }}" alt="image" title="image"> -->
+							{% for ava in userProfile %}
+							<img class="img-fluid" src="{{ ava.image.url }}" alt="image" title="image">
+							{% endfor %}
+						</div>
+						<div class="col-sm-9 col-xs-12 padd0">
+							<h4>{{user.first_name}} {{user.last_name}}</h4>
+							<div class="common">
+								<p class="des"><i class="la la-map-marker"></i> {{request.user.username}}</p>
+								<p class="des1">Аккаунт был создан: {{user.date_joined}}</p>
+							</div>
+							<ul class="list-inline">
+								<li><a href="{% url 'dashboard' %}"><img src="{% static 'images/dashboard/grid.png' %}" alt="image" title="image" /><p>Профиль</p></a></li>
+								<li ><a href="dashboard_my_ads.html"><img src="{% static 'images/dashboard/card.png' %}" alt="image" title="image" /><p>Мои объявления</p></a></li>
+								<li><a href="dashboard_my_searches.html"><img src="{% static 'images/dashboard/search.png' %}" alt="image" title="image" /><p>Мои поиски</p></a></li>
+								<li ><a href="dashboard_fav_ads.html"><img src="{% static 'images/dashboard/heart.png' %}" alt="image" title="image" /><p>Избранные объявления</p></a></li>
+								<li><a href="dashboard_message.html"><img src="{% static 'images/dashboard/message.png' %}" alt="image" title="image" /><p>Чат</p></a></li>
+								<li class="active"><a href="{% url 'settings_profile' %}"><img src="{% static 'images/dashboard/setting.png' %}" alt="image" title="image" /><p>Настройки</p></a></li>
+							</ul>
+						</div>
+					</div>
+                    <div class="inner-setting">
+						<div class="panel-group" id="accordion">
+							<div class="panel panel-default active">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h4 class="panel-title">Контактные данные  <i class="fa fa-angle-right" aria-hidden="true"></i></h4>
+									</a>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse">
+									<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<form class="form-horizontal" method="post">
+												{% csrf_token %}
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="name" value="" id="input-name" class="form-control" placeholder="Name" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12">
+														<select class="selectpicker form-control bs-select-hidden" name="location">
+															<option value="1">Country</option>
+															<option value="0">India</option>
+															<option value="0">Pakistan</option>
+														</select>
+													</div>
+												</div>	
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="city" value="" id="input-city" class="form-control" placeholder="City" type="text">
+													</div>
+												</div>
+												<div class="buttons">
+													<input class="btn btn-primary" value="Save" type="submit">
+												</div>
+											</form>
+										</div>
+										<div class="col-sm-4"></div>
+									</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h4 class="panel-title"> Телефонный номер <i class="fa fa-angle-right" aria-hidden="true"></i></h4>
+									</a>
+								</div>
+								<div id="collapse2" class="panel-collapse collapse">
+									<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<form class="form-horizontal" method="post">
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="phone" value="" id="input-phone" class="form-control" placeholder="Enter Phone Number" type="text">
+													</div>
+												</div>
+												<div class="buttons">
+													<input class="btn btn-primary" value="Save" type="submit">
+												</div>
+											</form>
+										</div>
+										<div class="col-sm-4"></div>
+									</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h4 class="panel-title">Изменить пароль <i class="fa fa-angle-right" aria-hidden="true"></i>
+									</h4></a>
+								</div>
+								<div id="collapse3" class="panel-collapse collapse">
+									<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<form class="form-horizontal" method="post">
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="password" value="" id="input-password" class="form-control" placeholder="Enter old password" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="password1" value="" id="input-password1" class="form-control" placeholder="Enter new password" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input name="password2" value="" id="input-password2" class="form-control" placeholder="Repeat password" type="text">
+													</div>
+												</div>
+												<div class="buttons">
+													<input class="btn btn-primary" value="Save" type="submit">
+												</div>
+											</form>
+										</div>
+										<div class="col-sm-4"></div>
+									</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><h4 class="panel-title"> Сменить Email <i class="fa fa-angle-right" aria-hidden="true"></i></h4></a>
+								</div>
+								<div id="collapse4" class="panel-collapse collapse">
+									<div class="panel-body">
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<form class="form-horizontal" method="post">
+												{% csrf_token %}
+												<div class="form-group">
+													<div class="col-sm-12">
+														<!-- <input name="mail" value="" id="input-mail" class="form-control" placeholder="Enter new email" type="text"> -->
+														{{ user_form.email }}
+													</div>
+												</div>
+												<div class="buttons">
+													<input class="btn btn-primary" value="Save" type="submit">
+												</div>
+											</form>
+										</div>
+										<div class="col-sm-4"></div>
+									</div>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><h4 class="panel-title">Выход из аккаунта <i class="fa fa-angle-right" aria-hidden="true"></i>
+									</h4></a>
+								</div>
+								<div id="collapse7" class="panel-collapse collapse">
+									<div class="panel-body">
+											<div class="buttons text-center">
+												<input class="btn btn-primary" onclick="window.location.href='/logout'" value="Выйти" type="submit">
+											</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><h4 class="panel-title">Delete Account <i class="fa fa-angle-right" aria-hidden="true"></i>
+									</h4></a>
+								</div>
+								<div id="collapse6" class="panel-collapse collapse">
+									<div class="panel-body">
+										<form class="form-horizontal" method="post">
+											<div class="buttons text-center">
+												<input class="btn btn-primary" value="Delete Account" type="submit">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+<a href="{% url 'login' %}" class="text-uppercase">У вас нету акаунта зарегеструетесь !</a>
+{% endif %}
+<!-- ad-single end here -->
+{% endblock %}
+
+{% block footer %} 
+    {% include 'footer.html' %}
+{% endblock %}
